@@ -10,7 +10,7 @@ function App() {
 
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/health")
+    fetch("https://hiresense-ai-lg6y.onrender.com/api/health")
       .then((response) => response.json())
       .then((data) => {
         setMessage(data.message);
