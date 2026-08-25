@@ -21,10 +21,13 @@ function Hero() {
     formData.append("resume", file);
 
     try {
-      const response = await fetch("http://localhost:5000/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://hiresense-ai-lg6y.onrender.com/api/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
 
@@ -46,7 +49,10 @@ function Hero() {
   // View History
   const getHistory = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/history");
+      const response = await fetch(
+        "https://hiresense-ai-lg6y.onrender.com/api/history"
+      );
+
       const data = await response.json();
 
       if (data.success) {
@@ -56,18 +62,23 @@ function Hero() {
       console.log(err);
     }
   };
+
+  // Clear History
   const clearHistory = async () => {
-  const response = await fetch("http://localhost:5000/api/history", {
-    method: "DELETE",
-  });
+    const response = await fetch(
+      "https://hiresense-ai-lg6y.onrender.com/api/history",
+      {
+        method: "DELETE",
+      }
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  if (data.success) {
-    setHistory([]);
-    alert("History Cleared Successfully");
-  }
-};
+    if (data.success) {
+      setHistory([]);
+      alert("History Cleared Successfully");
+    }
+  };
 
   // Download PDF
   const handleDownload = () => {
@@ -128,10 +139,7 @@ function Hero() {
               {loading ? "Analyzing..." : "ANALYZE RESUME"}
             </button>
 
-            <button
-              className="history-btn"
-              onClick={getHistory}
-            >
+            <button className="history-btn" onClick={getHistory}>
               VIEW HISTORY
             </button>
           </>
@@ -180,10 +188,7 @@ function Hero() {
             ))}
           </ul>
 
-          <button
-            className="download-btn"
-            onClick={handleDownload}
-          >
+          <button className="download-btn" onClick={handleDownload}>
             📄 Download Report
           </button>
         </div>
@@ -192,12 +197,10 @@ function Hero() {
       {history.length > 0 && (
         <div className="analysis-box">
           <h2>📜 Resume History</h2>
-          <button
-  className="history-btn"
-  onClick={clearHistory}
->
-  🗑 Clear History
-</button>
+
+          <button className="history-btn" onClick={clearHistory}>
+            🗑 Clear History
+          </button>
 
           {history.map((resume) => (
             <div
@@ -208,6 +211,7 @@ function Hero() {
               }}
             >
               <h3>{resume.fileName}</h3>
+
               <p>
                 <strong>Score:</strong> {resume.score}/100
               </p>
