@@ -27,7 +27,7 @@ const ai = new GoogleGenAI({
 
 const upload = multer({ dest: "uploads/" });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Home Route
 app.get("/", (req, res) => {
